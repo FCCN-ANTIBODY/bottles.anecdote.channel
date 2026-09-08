@@ -16,7 +16,12 @@ guess, and every guess is a place this repository under-specified.
 4. **Do not decide who owns the player** (`OPEN.md` §1) from this side alone. It is a boundary with
    `anecdote.channel` and this repository is an interested party.
 5. **Not all bottle making is library behaviour.** That is why this repository exists. Do not
-   reintroduce a library dependency into the format.
+   reintroduce a library dependency into the format — the library is **co-mounted on a node**, not
+   downstream of this.
+6. **A bottle's authority is at minting time only.** It can place a control code; it cannot revoke
+   one, learn who used it, or check anything online — the README's clean room forbids the network that
+   would take. Any design with a revocation path, a callback, or a phone-home has assumed a channel
+   that does not exist. See `ONBOARDING.md`.
 
 ## Conventions
 
