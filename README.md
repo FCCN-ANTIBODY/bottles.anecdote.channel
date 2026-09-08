@@ -154,6 +154,26 @@ requirements, written before this repository existed so that provisioning it had
 against. Where the two disagree, this repository is wrong until argued otherwise — a consumer that
 had to guess is evidence the supplier under-specified.
 
+**Consumer here means co-mounted, not downstream.** The library consumes bottles by being **stacked
+with them on a node repository** — a civic node, a station node, or a pure communications node.
+Neither repository depends on the other; they meet on a node. That distinction places the boundary
+correctly and a dependency reading would not.
+
+## Onboarding is a job this repository did not ask for
+
+**The bottle is the free transit object.** It moves; nothing else in the picture does. That makes it
+the thing a stranger actually encounters, and therefore **a natural onboarding magnet** — which is a
+job it gets by being portable rather than by being suited to it.
+
+The library onboards people generally. A bottle found in the wild, carrying a control code, onboards
+you with the bottle — because the library may later be **constituency-bounded** and a stranger
+holding an artifact is in no constituency by definition.
+
+The constraint that shapes all of it: **a bottle exercises authority at minting time and never at
+runtime.** It can place a control code; it cannot revoke one, cannot know who used it, and cannot be
+online to check. See [`ONBOARDING.md`](ONBOARDING.md), where the seam is still open.
+
 ## Open
 
-See [`OPEN.md`](OPEN.md). The largest is **who owns the player.**
+See [`OPEN.md`](OPEN.md). The largest is **who owns the player.** Newest is the onboarding boundary,
+and the one most likely to be decided by accident is **the vanity QR's cost in fountain length.**
