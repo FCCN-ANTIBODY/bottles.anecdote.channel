@@ -46,17 +46,44 @@ handover is a workspace, updates are history.
 - **Never pack a working copy.** `.git` carries reflogs, other remotes, stashes and config: that is a
   disclosure, not a handover. There must be a canonical build.
 
-## The open questions, in the order they block each other
+## The README is the wizard — which answers most of this
 
-1. **What is the canonical workspace shape?** The operator's instinct is that this is *part of what a
-   wizard is* — something in the process demands a workspace of a particular arrangement. Until this
-   is named, the builder below has nothing to target.
+`Added by the operator mid-plan, 2026-09-21.` The container is what `press/` hands the viewer **to
+interpret as a source tree**, so it can carry a `README.md` and that README *directs the holder*:
+
+> *"The README kind of is the wizard… even if it's a thing that comes with a git repository and it
+> needs you to be in there and treat that like the current working directory, the README can kind of
+> compel this, including with includes for liquid that create iframes."*
+
+This is not speculative and it is not new code. `press/face.mjs` already resolves
+`LADDER = ["index.md", "README.md", "index.html"]`, so a README at the root **is** the face of any
+container. `jekyll-enough` already supports `{% include %}`, and the lazy face loop fetches a missing
+include by name rather than needing a build. And it already runs: `you.discoverywritten.com/bottles/`
+renders a control branch's own `README.md` through that engine with injected state, as the whole
+guided page.
+
+Three consequences:
+
+- **The workspace's entry point is settled** — a root `README.md`, because that is what the ladder
+  resolves. The remaining part of "what shape" is what else must be beside it.
+- **A wizard does not need to be a separate artifact.** Shipping the workspace ships its wizard.
+  Submodules are for a *shared* wizard that should fast-forward independently of the projects
+  linking it — an update path, not the basic mechanism.
+- **The wizard can be interactive without a build.** Liquid includes can emit iframes, so a
+  markdown file in a source tree can host the chamber, a keeper, or a form. This is what the
+  no-build posture was for.
+
+## The open questions that remain
+
+1. **What else is in the canonical shape, beside the README?** The entry point is decided; the rest
+   is not — and the operator's instinct stands that a wizard is what demands a particular
+   arrangement.
 2. **Which type identifier value marks a workspace payload,** and does a workspace-with-a-repo differ
    from a workspace-with-a-snapshot at that level?
-3. **Is a wizard itself a cloneable, fast-forwardable workspace?** Forming, not decided: if a wizard
-   is "the form I want to fill out" and it is wholly fast-forwardable, then self-service means
-   acquiring a workspace, completing it, and arriving at the pull request already ready. That would
-   make the wizard imply the workspace rather than merely describe steps.
+3. **Does a self-servicer arrive already ready?** If the wizard is the README and the workspace is
+   fast-forwardable, then someone can acquire a workspace, complete it unaided, and turn up at the
+   pull request finished. That is the shape to aim at; what it needs from the *provider* side is
+   unwritten.
 4. **Where the boundary falls.** Bottles owns the builder and the transit line; the library owns what
    is inside and the onboarding. A workspace bottle sits exactly on that seam.
 
@@ -67,6 +94,8 @@ handover is a workspace, updates are history.
 - [ ] reproducibility proven: two runs over the same inputs give identical bytes
 - [ ] the type identifier value for a workspace payload is decided and written down
 - [ ] the repository-vs-flat-snapshot rule recorded, with the control-branch loop hazard as its reason
+- [ ] a root `README.md` is required by the builder, not merely permitted
+- [ ] an include that emits an iframe is proven to render from a bottle through the face loop
 - [ ] question 3 either answered or explicitly deferred with its cost named
 - [ ] `OPEN.md` updated — this touches §1 (who owns the player) and the library seam
 - [ ] nothing in here provisions, publishes, or signs anything on its own
