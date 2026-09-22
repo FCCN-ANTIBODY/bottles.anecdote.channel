@@ -1,0 +1,78 @@
+The workspace payload: a bottle that arrives configured, and what makes its bytes canonical
+
+`status: WIP — goals first, boxes unchecked on purpose.` Nothing here is finished. The checkboxes are
+the honest state; if they are unmarked, this is not ready to merge no matter how complete the prose
+reads.
+
+## The goal
+
+**A bottle should be able to carry a workspace, not only a history — and its bytes should still be
+canonical.** Today we can hand someone a repository's history. That is not the same as handing them
+the thing they are supposed to work in, and the difference is measurable rather than philosophical.
+
+## What is settled, and by what
+
+**Measured 2026-09-21.** A workspace with rules tracked in `.goblin/hooks/`, `core.hooksPath` set,
+and a pre-commit hook that refuses a non-shouty `CONSTITUTION.md` — shipped two ways:
+
+| | `git bundle` | the workspace, packed |
+| --- | --- | --- |
+| size | 681 B | 16,880 B |
+| is a repo on arrival | yes | yes |
+| tracked rules present | yes | yes |
+| `core.hooksPath` | **the recipient's global** | `.goblin/hooks` |
+| the hook actually fires | **no — the commit went through** | yes — refused |
+
+**The failure is worse than absence.** With a bundle the rules arrive and the *activation* does not,
+so it silently inherits whatever the recipient's machine says. The goblin is not missing; it is
+replaced by the other party's configuration, in a payload that looks complete.
+
+The packed workspace then **fast-forwarded from a 635-byte delta bundle**, so the asymmetry works:
+handover is a workspace, updates are history.
+
+**Ruled by the operator, 2026-09-21:**
+
+- A pristine bottle and a bottle are the same structure. An **empty bottle is the baseline**, and any
+  bottle's bytes are *the diff against it* — so anyone can wrap the same content canonically and get
+  identical bytes, signature aside. This is why "is it a bottle or in a bottle" is not a real
+  distinction.
+- Bottles carry a **type identifier**, and it says more than a content type: *this is firmware, this
+  is code, this is not data.* That is how the system knows what to treat as signed and canonical.
+- The payload may be **a repository or a flat snapshot**. A repository is *nicer* because you know
+  where fetches come from — it is not required.
+- **A control branch needs no history at all.** It is force-cleared, and reading back to an old
+  commit would make old payloads look writable again — a loop hazard. So the flat-snapshot case is
+  not a concession; it is the right shape there.
+- **Never pack a working copy.** `.git` carries reflogs, other remotes, stashes and config: that is a
+  disclosure, not a handover. There must be a canonical build.
+
+## The open questions, in the order they block each other
+
+1. **What is the canonical workspace shape?** The operator's instinct is that this is *part of what a
+   wizard is* — something in the process demands a workspace of a particular arrangement. Until this
+   is named, the builder below has nothing to target.
+2. **Which type identifier value marks a workspace payload,** and does a workspace-with-a-repo differ
+   from a workspace-with-a-snapshot at that level?
+3. **Is a wizard itself a cloneable, fast-forwardable workspace?** Forming, not decided: if a wizard
+   is "the form I want to fill out" and it is wholly fast-forwardable, then self-service means
+   acquiring a workspace, completing it, and arriving at the pull request already ready. That would
+   make the wizard imply the workspace rather than merely describe steps.
+4. **Where the boundary falls.** Bottles owns the builder and the transit line; the library owns what
+   is inside and the onboarding. A workspace bottle sits exactly on that seam.
+
+## Merge qualifications
+
+- [ ] the canonical workspace shape is named, not implied
+- [ ] a builder that produces one **deterministically**, never from a working copy
+- [ ] reproducibility proven: two runs over the same inputs give identical bytes
+- [ ] the type identifier value for a workspace payload is decided and written down
+- [ ] the repository-vs-flat-snapshot rule recorded, with the control-branch loop hazard as its reason
+- [ ] question 3 either answered or explicitly deferred with its cost named
+- [ ] `OPEN.md` updated — this touches §1 (who owns the player) and the library seam
+- [ ] nothing in here provisions, publishes, or signs anything on its own
+
+## Not this
+
+Not a new transport. Not a change to how a bottle is rendered or carried — the QR path, the fountain
+and the player are untouched. This is about **what may legitimately be inside one**, and how to build
+that so two people get the same bytes.
