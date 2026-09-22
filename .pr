@@ -88,13 +88,37 @@ Three consequences:
   markdown file in a source tree can host the chamber, a keeper, or a form. This is what the
   no-build posture was for.
 
+## The type identifier, decided 2026-09-21: a subtree
+
+> *"It was just like a subtree. We were always talking about just capturing a folder, and even if it
+> was empty and that was the root of it, that's all it had to be. It seems like a clear base case."*
+
+Which closes the loop with the empty-bottle baseline above: **the base case is a folder, possibly
+empty**, and every bottle's bytes are the diff from it. A *workspace* is not a new type — it is a
+subtree that happens to contain a `.git`. No taxonomy needed; `firmware` / `code` / `not data` remain
+hints layered on that, not competing kinds.
+
+**The feel, and the line it draws.** The operator reaches for a disk image, then rejects the route
+and keeps the sensation: *"when I open one of those Mac disk image things and it's got stuff inside
+of it… you're looking at a little bit of a file spread."* And then the constraint, which is the
+useful part:
+
+> *"Anything more powerful than that is just a sophisticated file walking around with esoteric logic,
+> probably extra executables."*
+
+So **a file spread is the ceiling, not the floor.** A builder that starts adding its own logic or
+shipping its own executables has left the format and become a program pretending to be a document.
+That is the thing to refuse, and it is a review criterion rather than a wish: if the builder needs to
+run something of its own to be understood, it is wrong.
+
 ## The open questions that remain
 
 1. **What else is in the canonical shape, beside the README?** The entry point is decided; the rest
    is not — and the operator's instinct stands that a wizard is what demands a particular
    arrangement.
-2. **Which type identifier value marks a workspace payload,** and does a workspace-with-a-repo differ
-   from a workspace-with-a-snapshot at that level?
+2. ~~Which type identifier value marks a workspace payload~~ — **answered: a subtree.** What
+   remains is whether a workspace-with-a-repo needs any hint distinguishing it from a
+   workspace-with-a-snapshot, or whether the presence of `.git` is self-evident enough.
 3. **Does a self-servicer arrive already ready?** If the wizard is the README and the workspace is
    fast-forwardable, then someone can acquire a workspace, complete it unaided, and turn up at the
    pull request finished. That is the shape to aim at; what it needs from the *provider* side is
@@ -107,13 +131,17 @@ Three consequences:
 - [ ] the canonical workspace shape is named, not implied
 - [ ] a builder that produces one **deterministically**, never from a working copy
 - [ ] reproducibility proven: two runs over the same inputs give identical bytes
-- [ ] the type identifier value for a workspace payload is decided and written down
+- [x] the type identifier is decided: **a subtree** — a folder, possibly empty, as the base case; a
+      workspace is a subtree containing a `.git`, not a separate kind
+- [ ] that decision is written into the format doc, not only into this plan
 - [ ] the repository-vs-flat-snapshot rule recorded, with the control-branch loop hazard as its reason
 - [ ] a root `README.md` is required by the builder, not merely permitted
 - [ ] the routing rule is stated for wizard READMEs: onboard and link, never restate a step
 - [ ] an include that emits an iframe is proven to render from a bottle through the face loop
 - [ ] question 3 either answered or explicitly deferred with its cost named
 - [ ] `OPEN.md` updated — this touches §1 (who owns the player) and the library seam
+- [ ] the builder is checked against the file-spread ceiling: no logic of its own, no shipped
+      executables, nothing that must be run before the bottle can be understood
 - [ ] nothing in here provisions, publishes, or signs anything on its own
 
 ## Not this
