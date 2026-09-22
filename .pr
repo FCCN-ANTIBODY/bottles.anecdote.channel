@@ -46,7 +46,7 @@ handover is a workspace, updates are history.
 - **Never pack a working copy.** `.git` carries reflogs, other remotes, stashes and config: that is a
   disclosure, not a handover. There must be a canonical build.
 
-## The README is the wizard — which answers most of this
+## The README is the wizard's onboarding — which answers most of this
 
 `Added by the operator mid-plan, 2026-09-21.` The container is what `press/` hands the viewer **to
 interpret as a source tree**, so it can carry a `README.md` and that README *directs the holder*:
@@ -54,6 +54,21 @@ interpret as a source tree**, so it can carry a `README.md` and that README *dir
 > *"The README kind of is the wizard… even if it's a thing that comes with a git repository and it
 > needs you to be in there and treat that like the current working directory, the README can kind of
 > compel this, including with includes for liquid that create iframes."*
+
+**Honed the same day, and it matters:** the README is the wizard's *onboarding*, not the wizard
+entire. It instructs the steps and is free to employ **sub-resources** to carry them — so the README
+is the door and the guide, never the whole apparatus.
+
+That is the discipline the library already holds itself to in `ADOPTING.md`, which is the constellation's
+own first wizard: *"It **routes**. It does not restate. Every fact below has exactly one home somewhere
+else, and the link is the point — a second copy of a fact is a thing that can disagree with the first."*
+A wizard README inherits that rule rather than needing its own. A step written out twice is a step
+that can disagree with itself, and a wizard is exactly where that would be expensive.
+
+So a sub-resource may be a tracked file beside the README, an `{% include %}`, an iframe to another
+origin, or a submodule — and **the README chooses**. Only the submodule case fast-forwards
+independently of the workspace that links it, which is what makes it the right form for a *shared*
+step and the wrong form for a bespoke one.
 
 This is not speculative and it is not new code. `press/face.mjs` already resolves
 `LADDER = ["index.md", "README.md", "index.html"]`, so a README at the root **is** the face of any
@@ -66,9 +81,9 @@ Three consequences:
 
 - **The workspace's entry point is settled** — a root `README.md`, because that is what the ladder
   resolves. The remaining part of "what shape" is what else must be beside it.
-- **A wizard does not need to be a separate artifact.** Shipping the workspace ships its wizard.
-  Submodules are for a *shared* wizard that should fast-forward independently of the projects
-  linking it — an update path, not the basic mechanism.
+- **A wizard does not need to be a separate artifact.** Shipping the workspace ships its onboarding,
+  and the steps it employs travel with it. Submodules are for a *shared* step or wizard that should
+  fast-forward independently of the workspaces linking it — an update path, not the basic mechanism.
 - **The wizard can be interactive without a build.** Liquid includes can emit iframes, so a
   markdown file in a source tree can host the chamber, a keeper, or a form. This is what the
   no-build posture was for.
@@ -95,6 +110,7 @@ Three consequences:
 - [ ] the type identifier value for a workspace payload is decided and written down
 - [ ] the repository-vs-flat-snapshot rule recorded, with the control-branch loop hazard as its reason
 - [ ] a root `README.md` is required by the builder, not merely permitted
+- [ ] the routing rule is stated for wizard READMEs: onboard and link, never restate a step
 - [ ] an include that emits an iframe is proven to render from a bottle through the face loop
 - [ ] question 3 either answered or explicitly deferred with its cost named
 - [ ] `OPEN.md` updated — this touches §1 (who owns the player) and the library seam
